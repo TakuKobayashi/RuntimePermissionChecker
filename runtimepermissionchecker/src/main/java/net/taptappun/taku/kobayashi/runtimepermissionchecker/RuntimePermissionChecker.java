@@ -31,7 +31,7 @@ public class RuntimePermissionChecker {
         return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public static void requestPermissions(Activity activity, int requestCode){
+    public static void requestAllPermissions(Activity activity, int requestCode){
         if(Build.VERSION.SDK_INT >= 23) {
             ArrayList<String> requestPermissionNames = new ArrayList<String>();
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
