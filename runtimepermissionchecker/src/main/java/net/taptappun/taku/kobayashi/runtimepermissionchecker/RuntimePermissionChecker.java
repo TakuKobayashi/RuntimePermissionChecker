@@ -10,6 +10,7 @@ import android.os.Build;
 import java.util.ArrayList;
 
 public class RuntimePermissionChecker {
+    // Returns the settings permissions in the current application.
     public static ArrayList<PermissionInfo> getSettingPermissions(Context context){
         ArrayList<PermissionInfo> list = new ArrayList<PermissionInfo>();
         PackageInfo packageInfo = null;
@@ -26,16 +27,19 @@ public class RuntimePermissionChecker {
         return list;
     }
 
+    // check the permission has already been accepted.
     public static boolean hasSelfPermission(Context context, String permission) {
         if(Build.VERSION.SDK_INT < 23) return true;
         return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
     }
 
+    // request to show all permissions dialog, one by one.
     public static void requestAllPermissions(Activity activity, int requestCode){
         if(Build.VERSION.SDK_INT >= 23) {
             ArrayList<String> requestPermissionNames = new ArrayList<String>();
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
-            for(PermissionInfo permission : permissions){
+            for(int i = 0;i < permissions.size();++i){
+                PermissionInfo permission = permissions.get(i);
                 if(permission.protectionLevel == PermissionInfo.PROTECTION_DANGEROUS && !RuntimePermissionChecker.hasSelfPermission(activity, permission.name)){
                     requestPermissionNames.add(permission.name);
                 }
@@ -46,6 +50,7 @@ public class RuntimePermissionChecker {
         }
     }
 
+    // request to show the permissions dialog, you need to.
     public static void requestPermission(Activity activity, int requestCode, String permissionName){
         if(Build.VERSION.SDK_INT >= 23) {
             boolean existPermission = false;
@@ -63,6 +68,7 @@ public class RuntimePermissionChecker {
         }
     }
 
+    // check all permissions have been accepted.
     public static boolean existConfirmPermissions(Activity activity){
         if(Build.VERSION.SDK_INT >= 23) {
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
