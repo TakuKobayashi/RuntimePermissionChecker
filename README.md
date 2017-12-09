@@ -56,3 +56,8 @@ public class MainActivity extends Activity {
 ```
 
 Also, when under Android version 6.0 or the user has already accepted permissions, you can do just the same way.
+
+# Others
+
+I wrote a more detailed article, However it is in Japanese.
+https://qiita.com/taptappun/items/7fae4317d751245b2089
