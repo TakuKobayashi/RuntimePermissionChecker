@@ -1,7 +1,7 @@
 # What is This
 This library is the simplest to implement the Android RuntimePermission. 
 The Android RuntimePermission is that the application request the permissions to user when if the application is used the particular feature. 
-[The Android RuntimePermission](https://developer.android.com/training/permissions/requesting.html, "For details")
+[For details](https://developer.android.com/training/permissions/requesting.html)
 Android version 6.0 (marshmallow) and later should be shown the dialog to use the permissions.
 
 # Download
