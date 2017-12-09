@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         if (requestCode != REQUEST_CODE)
             return;
-        if(!Util.existConfirmPermissions(this)){
+        if(!RuntimePermissionChecker.existConfirmPermissions(this)){
             // write features you want to execute.
         }
     }
