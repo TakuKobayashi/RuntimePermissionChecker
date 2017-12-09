@@ -46,6 +46,23 @@ public class RuntimePermissionChecker {
         }
     }
 
+    public static void requestPermission(Activity activity, int requestCode, String permissionName){
+        if(Build.VERSION.SDK_INT >= 23) {
+            boolean existPermission = false;
+            ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
+            for(int i = 0;i < permissions.size();++i){
+                PermissionInfo permission = permissions.get(i);
+                if(permission.protectionLevel == PermissionInfo.PROTECTION_DANGEROUS && permission.name == permissionName){
+                    existPermission = true;
+                    break;
+                }
+            }
+            if(existPermission && RuntimePermissionChecker.hasSelfPermission(activity, permissionName)) {
+                activity.requestPermissions(new String[]{permissionName}, requestCode);
+            }
+        }
+    }
+
     public static boolean existConfirmPermissions(Activity activity){
         if(Build.VERSION.SDK_INT >= 23) {
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
