@@ -17,7 +17,7 @@ allprojects {
 And add the dependency in your android project's module.
 ```build.gradle
 dependencies {
-    compile 'com.github.TakuKobayashi:RuntimePermissionChecker:v1.0.0'
+    compile 'com.github.TakuKobayashi:RuntimePermissionChecker:v1.0.1'
 }
 ```
 
