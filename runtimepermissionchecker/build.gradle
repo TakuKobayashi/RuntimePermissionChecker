@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'android-maven'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 26
@@ -23,4 +24,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+publish {
+    userOrg = 'kobayashi'
+    groupId = 'net.taptappun.taku.kobayashi'
+    artifactId = 'runtimepermissionchecker'
+    publishVersion = "1.0.3"
+    desc = 'I made it possible to distribute it from Bitray'
+    website = 'https://github.com/TakuKobayashi/RuntimePermissionChecker'
 }
