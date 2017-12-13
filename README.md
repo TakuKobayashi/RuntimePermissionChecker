@@ -8,19 +8,10 @@ The Android RuntimePermission is that the application request the permissions to
 Android version 6.0 Marshmallow (API Level 23) and later should be shown the dialog to use the permissions.
 
 # Download
-Add it in your root build.gradle at the end of repositories
-```build.gradle
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-And add the dependency in your android project's module.
+Add the dependency in your android project's module.
 ```build.gradle
 dependencies {
-    compile 'com.github.TakuKobayashi:RuntimePermissionChecker:v1.0.2'
+    compile 'net.taptappun.taku.kobayashi:runtimepermissionchecker:1.0.4'
 }
 ```
 
