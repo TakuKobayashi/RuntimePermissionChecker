@@ -40,7 +40,7 @@ public class RuntimePermissionChecker {
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
             for(int i = 0;i < permissions.size();++i){
                 PermissionInfo permission = permissions.get(i);
-                if(permission.protectionLevel == PermissionInfo.PROTECTION_DANGEROUS && !RuntimePermissionChecker.hasSelfPermission(activity, permission.name)){
+                if(RuntimePermissionChecker.isDangerousPermission(permission) && !RuntimePermissionChecker.hasSelfPermission(activity, permission.name)){
                     requestPermissionNames.add(permission.name);
                 }
             }
@@ -57,7 +57,7 @@ public class RuntimePermissionChecker {
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
             for(int i = 0;i < permissions.size();++i){
                 PermissionInfo permission = permissions.get(i);
-                if(permission.protectionLevel == PermissionInfo.PROTECTION_DANGEROUS && permission.name == permissionName){
+                if(RuntimePermissionChecker.isDangerousPermission(permission) && permission.name == permissionName){
                     existPermission = true;
                     break;
                 }
@@ -74,7 +74,7 @@ public class RuntimePermissionChecker {
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
             boolean isRequestPermission = false;
             for(PermissionInfo permission : permissions){
-                if(permission.protectionLevel == PermissionInfo.PROTECTION_DANGEROUS && !RuntimePermissionChecker.hasSelfPermission(activity, permission.name)){
+                if(RuntimePermissionChecker.isDangerousPermission(permission) && !RuntimePermissionChecker.hasSelfPermission(activity, permission.name)){
                     isRequestPermission = true;
                     break;
                 }
@@ -82,5 +82,9 @@ public class RuntimePermissionChecker {
             return isRequestPermission;
         }
         return true;
+    }
+
+    private static boolean isDangerousPermission(PermissionInfo permissionInfo){
+        return (permissionInfo.protectionLevel & 0x01) == PermissionInfo.PROTECTION_DANGEROUS;
     }
 }

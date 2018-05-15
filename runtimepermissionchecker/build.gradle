@@ -3,10 +3,10 @@ apply plugin: 'android-maven'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,7 +34,7 @@ publish {
     repoName ='RuntimePermissionChecker'
     groupId = 'net.taptappun.taku.kobayashi'
     artifactId = 'runtimepermissionchecker'
-    publishVersion = "1.0.4"
+    publishVersion = "1.1.0"
     desc = 'I made it possible to distribute it from Bitray'
     website = 'https://github.com/TakuKobayashi/RuntimePermissionChecker'
 }
