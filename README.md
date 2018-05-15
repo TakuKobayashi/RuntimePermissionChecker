@@ -11,7 +11,7 @@ Android version 6.0 Marshmallow (API Level 23) and later should be shown the dia
 Add the dependency in your android project's module.
 ```build.gradle
 dependencies {
-    compile 'net.taptappun.taku.kobayashi:runtimepermissionchecker:1.0.4'
+    implementation 'net.taptappun.taku.kobayashi:runtimepermissionchecker:1.1.0'
 }
 ```
 
@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 ```
 This will automatically display the dialog if you add permissions that the user needs to display the dialog.
 
-if you want to execute the feature when the all permission have been permitted, you add the following.
+if you want to execute the feature when the all permissions have been permitted, you add the following.
 ```MainActivity.java
 public class MainActivity extends Activity {
     private static final int REQUEST_CODE = 1;
@@ -47,6 +47,20 @@ public class MainActivity extends Activity {
 ```
 
 Also, when under Android version 6.0 or the user has already accepted permissions, you can do just the same way.
+
+If you want to individually request to the permission, try like this.
+```MainActivity.java
+public class MainActivity extends Activity {
+    private static final int REQUEST_CODE = 1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        ...
+        RuntimePermissionChecker.requestPermission(this, REQUEST_CODE, Manifest.permission.CAMERA);
+    }
+}
+```
+In this case it requests to camera permission.
 
 # Others
 
