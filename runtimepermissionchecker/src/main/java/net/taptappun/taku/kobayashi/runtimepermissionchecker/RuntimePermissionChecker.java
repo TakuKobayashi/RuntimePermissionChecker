@@ -62,7 +62,7 @@ public class RuntimePermissionChecker {
                     break;
                 }
             }
-            if(existPermission && RuntimePermissionChecker.hasSelfPermission(activity, permissionName)) {
+            if(existPermission && !RuntimePermissionChecker.hasSelfPermission(activity, permissionName)) {
                 activity.requestPermissions(new String[]{permissionName}, requestCode);
             }
         }
