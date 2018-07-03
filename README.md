@@ -11,7 +11,7 @@ Android version 6.0 Marshmallow (API Level 23) and later should be shown the dia
 Add the dependency in your android project's module.
 ```build.gradle
 dependencies {
-    implementation 'net.taptappun.taku.kobayashi:runtimepermissionchecker:1.1.0'
+    implementation 'net.taptappun.taku.kobayashi:runtimepermissionchecker:1.1.1'
 }
 ```
 
