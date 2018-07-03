@@ -57,12 +57,12 @@ public class RuntimePermissionChecker {
             ArrayList<PermissionInfo> permissions = RuntimePermissionChecker.getSettingPermissions(activity);
             for(int i = 0;i < permissions.size();++i){
                 PermissionInfo permission = permissions.get(i);
-                if(RuntimePermissionChecker.isDangerousPermission(permission) && permission.name == permissionName){
+                if(RuntimePermissionChecker.isDangerousPermission(permission) && permission.name.equals(permissionName)){
                     existPermission = true;
                     break;
                 }
             }
-            if(existPermission && RuntimePermissionChecker.hasSelfPermission(activity, permissionName)) {
+            if(existPermission && !RuntimePermissionChecker.hasSelfPermission(activity, permissionName)) {
                 activity.requestPermissions(new String[]{permissionName}, requestCode);
             }
         }
