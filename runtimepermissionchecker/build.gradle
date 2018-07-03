@@ -34,7 +34,7 @@ publish {
     repoName ='RuntimePermissionChecker'
     groupId = 'net.taptappun.taku.kobayashi'
     artifactId = 'runtimepermissionchecker'
-    publishVersion = "1.1.0"
+    publishVersion = "1.1.1"
     desc = 'I made it possible to distribute it from Bitray'
     website = 'https://github.com/TakuKobayashi/RuntimePermissionChecker'
 }
