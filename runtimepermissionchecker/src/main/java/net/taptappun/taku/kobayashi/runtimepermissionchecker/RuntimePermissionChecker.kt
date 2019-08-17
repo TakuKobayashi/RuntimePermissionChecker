@@ -9,7 +9,9 @@ import android.os.Build
 import java.util.ArrayList
 
 object RuntimePermissionChecker {
-    // Returns the settings permissions in the current application.
+    /**
+     *  Returns the settings permissions in the current application.
+     */
     fun getSettingPermissions(context: Context): ArrayList<PermissionInfo> {
         val list = ArrayList<PermissionInfo>()
         var packageInfo: PackageInfo? = null
@@ -27,12 +29,16 @@ object RuntimePermissionChecker {
         return list
     }
 
-    // check the permission has already been accepted.
+    /**
+     *  check the permission has already been accepted.
+     */
     fun hasSelfPermission(context: Context, permission: String): Boolean {
         return if (Build.VERSION.SDK_INT < 23) true else context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
 
-    // request to show all permissions dialog, one by one.
+    /**
+     *  request to show all permissions dialog, one by one.
+     */
     fun requestAllPermissions(activity: Activity, requestCode: Int) {
         if (Build.VERSION.SDK_INT >= 23) {
             val requestPermissionNames = ArrayList<String>()
@@ -49,7 +55,9 @@ object RuntimePermissionChecker {
         }
     }
 
-    // request to show the permissions dialog, you need to.
+    /**
+     *  request to show the permissions dialog, you need to.
+     */
     fun requestPermission(activity: Activity, requestCode: Int, permissionName: String) {
         if (Build.VERSION.SDK_INT >= 23) {
             var existPermission = false
@@ -67,7 +75,9 @@ object RuntimePermissionChecker {
         }
     }
 
-    // check all permissions have been accepted.
+    /**
+     *  check all permissions have been accepted.
+     */
     fun existConfirmPermissions(activity: Activity): Boolean {
         if (Build.VERSION.SDK_INT >= 23) {
             val permissions = RuntimePermissionChecker.getSettingPermissions(activity)
