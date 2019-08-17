@@ -5,10 +5,17 @@ apply plugin: 'com.novoda.bintray-release'
 android {
     compileSdkVersion 28
     defaultConfig {
+        def versionNameList = "$application_version".split(/\./)
+        def powCounter = versionNameList.size()
+        def versionNumbers = versionNameList.collect{numberString -> numberString.toInteger()}
+        def versionNumber = versionNumbers.sum{ number ->
+            powCounter = powCounter - 1
+            (Math.pow(100, powCounter) * number).toInteger()
+        }
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode versionNumber
+        versionName "$application_version"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -35,7 +42,7 @@ publish {
     repoName ='RuntimePermissionChecker'
     groupId = 'net.taptappun.taku.kobayashi'
     artifactId = 'runtimepermissionchecker'
-    publishVersion = "1.1.1"
+    publishVersion = "$application_version"
     desc = 'I made it possible to distribute it from Bitray'
     website = 'https://github.com/TakuKobayashi/RuntimePermissionChecker'
 }
