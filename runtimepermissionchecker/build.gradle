@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'android-maven'
 apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     compileSdkVersion 28
@@ -45,4 +47,17 @@ publish {
     publishVersion = "$application_version"
     desc = 'I made it possible to distribute it from Bitray'
     website = 'https://github.com/TakuKobayashi/RuntimePermissionChecker'
+}
+
+ktlint {
+    version = "0.34.2"
+    android = true
+    ignoreFailures = true
+    additionalEditorconfigFile = file(".editorconfig")
+}
+
+dokka {
+    outputFormat = 'html'
+    sourceDirs = files('src/main')
+    outputDirectory = "$buildDir/documents"
 }
