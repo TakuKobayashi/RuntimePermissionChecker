@@ -1,20 +1,36 @@
 apply plugin: 'com.android.library'
 apply plugin: 'android-maven'
 apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'org.jlleitschuh.gradle.ktlint'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        def versionNameList = "$application_version".split(/\./)
+        def powCounter = versionNameList.size()
+        def versionNumbers = versionNameList.collect{numberString -> numberString.toInteger()}
+        def versionNumber = versionNumbers.sum{ number ->
+            powCounter = powCounter - 1
+            (Math.pow(100, powCounter) * number).toInteger()
+        }
+        minSdkVersion 14
+        targetSdkVersion 28
+        versionCode versionNumber
+        versionName "$application_version"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
+            testCoverageEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     lintOptions {
@@ -25,8 +41,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
 publish {
@@ -34,7 +51,20 @@ publish {
     repoName ='RuntimePermissionChecker'
     groupId = 'net.taptappun.taku.kobayashi'
     artifactId = 'runtimepermissionchecker'
-    publishVersion = "1.1.1"
+    publishVersion = "$application_version"
     desc = 'I made it possible to distribute it from Bitray'
     website = 'https://github.com/TakuKobayashi/RuntimePermissionChecker'
+}
+
+ktlint {
+    version = "0.34.2"
+    android = true
+    ignoreFailures = true
+    additionalEditorconfigFile = file(".editorconfig")
+}
+
+dokka {
+    outputFormat = 'html'
+    sourceDirs = files('src/main')
+    outputDirectory = "$buildDir/documents"
 }
